@@ -1,0 +1,94 @@
+plugins {
+    id 'java'
+    id 'com.diffplug.spotless' version '6.25.0'
+    id 'com.github.spotbugs' version '6.0.10'
+    id 'org.kordamp.gradle.project-enforcer' version '0.14.0'
+    id 'jacoco'
+}
+
+repositories {
+    mavenCentral()
+}
+
+allprojects {
+    group = 'com.demo.factory'
+    version = '1.0.0-SNAPSHOT'
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(24))
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'com.diffplug.spotless'
+    apply plugin: 'com.github.spotbugs'
+    apply plugin: 'jacoco'
+
+    repositories {
+        mavenCentral()
+    }
+
+    java {
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
+    }
+
+    plugins.withType(JavaPlugin) {
+        java {
+            toolchain {
+                languageVersion = JavaLanguageVersion.of(21)
+            }
+        }
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+
+    spotless {
+        java {
+            eclipse().configFile("${rootDir}/.settings/org.eclipse.jdt.core.prefs")
+            licenseHeaderFile "${rootDir}/.settings/license-header.txt"
+            importOrder 'java', 'jakarta', 'com', 'io', 'org', 'life'
+        }
+
+        format 'typescript', {
+            target '**/*.ts'
+            prettier().configFile("${rootDir}/.settings/.prettierrc")
+            licenseHeaderFile "${rootDir}/.settings/license-header.txt", '(?m)^\\s*(import|export|interface|type|const|let|var|function|class|declare)'
+        }
+
+        format 'html', {
+            target '**/*.html'
+            prettier().configFile("${rootDir}/.settings/.prettierrc")
+        }
+    }
+
+    enforce {
+        rule(enforcer.rules.BannedDependencies) { r ->
+            r.exclude('org.projectlombok')
+            r.exclude('org.mapstruct')
+            r.exclude('javax.*')
+        }
+    }
+
+    spotbugs {
+        reportsDir = file("$buildDir/spotbugs")
+    }
+
+    jacoco {
+        reportsDirectory = layout.buildDirectory.dir("${rootDir}/build/reports/jacoco")
+    }
+
+    jacocoTestReport {
+        dependsOn test
+        reports {
+            xml.required = false
+            csv.required = false
+            html.outputLocation = layout.buildDirectory.dir("${rootDir}/build/reports/jacoco")
+        }
+    }
+}

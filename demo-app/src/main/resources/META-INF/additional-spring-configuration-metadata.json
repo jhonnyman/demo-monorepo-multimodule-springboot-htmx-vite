@@ -1,0 +1,34 @@
+{
+  "properties": [
+    {
+      "name": "minio.url",
+      "type": "java.lang.String",
+      "description": "Minio endpoint URL"
+    },
+    {
+      "name": "minio.access.name",
+      "type": "java.lang.String",
+      "description": "Minio username"
+    },
+    {
+      "name": "minio.access.secret",
+      "type": "java.lang.String",
+      "description": "Minio password"
+    },
+    {
+      "name": "minio.bucket.name",
+      "type": "java.lang.String",
+      "description": "Minio default bucket"
+    },
+    {
+      "name": "demo.vite.manifest-location",
+      "type": "java.lang.String",
+      "description": " Path to the generated Vite manifest. Can start with `classpath:` or be a relative or full file system path"
+    },
+    {
+      "name": "app.url",
+      "type": "java.lang.String",
+      "description": "The app URL"
+    }
+  ]
+}

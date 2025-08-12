@@ -1,0 +1,56 @@
+<head th:fragment="head(title, description, pageUrl, imageUrl)">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta
+        name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Sandals of Life" />
+
+    <!-- SECURITY -->
+    <meta name="_csrf" th:content="${_csrf.token}" />
+    <meta name="_csrf_header" th:content="${_csrf.headerName}" />
+
+    <!-- Favicon and Theme -->
+    <meta name="color-scheme" content="light dark" />
+    <link rel="manifest" th:href="@{/webmanifest.json}" />
+    <link rel="icon" type="image/x-=icon" th:href="@{/img/favicon.ico}" />
+
+    <!-- LOCAL SCRIPTS -->
+    <link rel="stylesheet" th:href="@{/css/vendors/pico.min.css}" />
+    <!-- <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+        crossorigin="anonymous"
+    />
+    <script
+        src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.6/dist/htmx.min.js"
+        integrity="sha384-Akqfrbj/HpNVo8k11SXBb6TlBWmXXlYQrCSqEWmyKJe+hDm3Z/B2WVG4smwBkRVm"
+        crossorigin="anonymous"
+        defer
+    ></script> -->
+    <!-- <script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/debug.js" crossorigin="anonymous"></script> -->
+
+    <meta http-equiv="Content-Language" th:content="${#locale}" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" th:content="${pageUrl}" />
+    <meta property="og:title" th:content="${title}" />
+    <meta property="og:description" th:content="${description}" />
+    <meta property="og:image" th:content="${imageUrl}" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="${pageUrl}" />
+    <meta name="twitter:title" th:content="${title}" />
+    <meta name="twitter:description" content="${description}" />
+    <meta name="twitter:image" content="${imageUrl}" />
+    <!-- FIXME add twitter channel once created -->
+    <meta name="twitter:creator" content="@yourhandle" />
+
+    <!-- Canonical -->
+    <link rel="canonical" th:href="${pageUrl}" />
+</head>

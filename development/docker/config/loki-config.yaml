@@ -1,0 +1,60 @@
+auth_enabled: false
+
+server:
+  http_listen_port: 3100
+  grpc_listen_port: 9095
+
+ingester:
+  wal:
+    dir: /var/lib/loki/wall
+  lifecycler:
+    address: 127.0.0.1
+    ring:
+      kvstore:
+        store: inmemory
+      replication_factor: 1
+  chunk_idle_period: 5m
+  chunk_retain_period: 30s
+  max_chunk_age: 1h
+  # max_transfer_retries: 3
+
+schema_config:
+  configs:
+    - from: 2024-04-01
+      store: boltdb-shipper
+      object_store: filesystem
+      schema: v11
+      index:
+        prefix: index_
+        period: 24h
+
+storage_config:
+  boltdb_shipper:
+    active_index_directory: /var/lib/loki/boltdb-shipper-active
+    cache_location: /var/lib/loki/boltdb-shipper-cache
+    cache_ttl: 24h
+    # shared_store: filesystem
+  aws:
+    s3: http://admin:adminadmin@minio.:9000/logs
+    s3forcepathstyle: true
+  filesystem:
+    directory: /tmp/loki/chunks
+
+limits_config:
+  retention_period: 24h
+  reject_old_samples: true
+  reject_old_samples_max_age: 24h
+  allow_structured_metadata: false
+
+table_manager:
+  retention_deletes_enabled: true
+
+compactor:
+  working_directory: /var/lib/loki
+  # shared_store: filesystem
+  compactor_ring:
+    kvstore:
+      store: inmemory
+
+ruler:
+  alertmanager_url: http://localhost:9093

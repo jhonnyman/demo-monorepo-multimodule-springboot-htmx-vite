@@ -1,0 +1,66 @@
+services:
+  loki:
+    image: grafana/loki:latest
+    container_name: loki
+    command: -config.file=/etc/loki/local-config.yaml
+    ports:
+      - "3100:3100"
+      - "9095:9095"
+    volumes:
+      - ./config/loki-config.yaml:/etc/loki/local-config.yaml
+      - loki:/var/lib/loki
+      - loki:/etc/loki
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3100/ready"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  alloy:
+    image: grafana/alloy:v1.10.0
+    container_name: alloy
+    command:
+      - run
+      - /etc/alloy/config.alloy
+      - --server.http.listen-addr=0.0.0.0:12345
+      - --storage.path=/var/lib/alloy/data
+    volumes:
+      - ./config/alloy-config.alloy:/etc/alloy/config.alloy
+      - /opt/demo-com/spring:/var/log/spring:ro
+      - alloy:/var/lib/alloy/data
+    ports:
+      - "12345:12345"
+    depends_on:
+      - loki
+
+  grafana:
+    image: grafana/grafana:12.0.2
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana:/var/lib/grafana
+    depends_on:
+      - loki
+
+volumes:
+  grafana:
+    driver: local
+    driver_opts:
+      type: none
+      device: "/opt/demo-com/grafana"
+      o: bind
+  loki:
+    driver: local
+    driver_opts:
+      type: none
+      device: "/opt/demo-com/loki"
+      o: bind
+  alloy:
+    driver: local
+    driver_opts:
+      type: none
+      device: "/opt/demo-com/alloy"
+      o: bind

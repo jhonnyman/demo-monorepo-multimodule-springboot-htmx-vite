@@ -1,0 +1,44 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Gradle Build All",
+      "type": "shell",
+      "command": "./gradlew build",
+      "group": "build",
+      "problemMatcher": [
+        "$gradle"
+      ]
+    },
+    {
+      "label": "Gradle Clean",
+      "type": "shell",
+      "command": "./gradlew clean",
+      "group": "build",
+      "problemMatcher": [
+        "$gradle"
+      ]
+    },
+    {
+      "label": "Gradle Test All",
+      "type": "shell",
+      "command": "./gradlew test",
+      "group": "test",
+      "problemMatcher": [
+        "$gradle"
+      ]
+    },
+    {
+      "label": "Run Demo App with Debug",
+      "type": "shell",
+      "command": "./gradlew",
+      "args": [
+        ":demo-app:bootRun",
+        "--debug-jvm"
+      ],
+      "group": "build",
+      "problemMatcher": [],
+      "isBackground": false
+    }
+  ]
+}

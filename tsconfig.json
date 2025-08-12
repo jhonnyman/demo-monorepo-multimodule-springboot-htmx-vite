@@ -1,0 +1,11 @@
+{
+    "files": [],
+    "references": [
+        {
+            "path": "demo-vendors/vite-ts"
+        },
+        {
+            "path": "demo-app/src/main/frontend"
+        },
+    ]
+}

@@ -1,0 +1,24 @@
+:root {
+    /* Pallet - Main */
+    --color-light: #dfddd5;
+    --color-secondary: #d0caba;
+    --color-primary: #855e40;
+    --color-primary-darker: #60371d;
+    --color-dark: #2c1609;
+
+    /* Pallet - Success */
+    --color-success: #4e4d23;
+    --color-success-light: #747347;
+    --color-success-dark: #22220c;
+
+    /* Pallet - Error */
+    --color-error: #5d2829;
+    --color-error-light: #834c4e;
+    --color-error-dark: #2a0e0f;
+
+    color-scheme: light dark;
+}
+
+* {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}

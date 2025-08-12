@@ -1,0 +1,15 @@
+{
+    "extends": "../../../../demo-vendors/vite-ts/tsconfig.json",
+    "compilerOptions": {
+        "rootDir": "src",
+        "paths": {
+            "@demo.com/vite-ts": [
+                "../../../../demo-vendors/vite-ts"
+            ]
+        },
+        "emitDeclarationOnly": true
+    },
+    "include": [
+        "src"
+    ]
+}

@@ -1,0 +1,40 @@
+{
+  "name": "@demo.com/demo-frontend",
+  "version": "0.0.1",
+  "private": true,
+  "license": "Apache-2.0",
+  "author": {
+    "name": "jhonnyman"
+  },
+  "contributors": [
+    {
+      "name": "jhonnyman",
+      "url": "https://github.com/jhonnyman"
+    }
+  ],
+  "keywords": [
+    "Java",
+    "Typescript",
+    "Monorepo",
+    "Modulith",
+    "Javascript",
+    "Gradle",
+    "Vite",
+    "HTMX",
+    "picocss"
+  ],
+  "workspaces": [
+    "demo-vendors/vite-ts",
+    "demo-app/src/main/frontend"
+  ],
+  "scripts": {
+    "build": "npm run build -ws",
+    "build:watch": "npm run build:watch -ws",
+    "clean": "npx -y rimraf node_modules **/node_modules/ **/dist/ package-lock.json",
+    "lint": "npm run lint -ws"
+  },
+  "devDependencies": {
+    "prettier": "3.6.2",
+    "rimraf": "6.0.1"
+  }
+}

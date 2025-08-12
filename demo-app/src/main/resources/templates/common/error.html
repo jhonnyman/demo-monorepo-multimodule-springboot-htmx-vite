@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+    <th:block
+        th:replace="~{common/head :: head(
+        #{common.title.demo-app},
+        #{common.description.demo-app},
+        @{/error},
+        @{/img/web-app-manifest-512x512.png},
+    )}"
+    >
+        <th:block th:fragment="customHead">
+            <!-- Necessary to not break the head fragment -->
+        </th:block>
+    </th:block>
+    <body>
+        <div class="container" th:fragment="error" th:if="${error != null}">
+            <span class="error" th:text="${error.message}"></span>
+            <a class="primary" href="/">Go back</a>
+        </div>
+    </body>
+</html>

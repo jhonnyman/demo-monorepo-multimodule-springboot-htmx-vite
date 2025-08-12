@@ -1,0 +1,25 @@
+{
+    "compilerOptions": {
+        "composite": true,
+        "declaration": true,
+        "declarationMap": true,
+        "declarationDir": "dist",
+        "forceConsistentCasingInFileNames": true,
+        "outDir": "dist",
+        "module": "NodeNext",
+        "target": "esnext",
+        "moduleResolution": "NodeNext",
+        "esModuleInterop": true,
+        "strict": true,
+        "allowJs": true,
+        "checkJs": true,
+        "removeComments": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitOverride": true,
+        "noUncheckedIndexedAccess": true,
+        "resolveJsonModule": true,
+        "skipLibCheck": true,
+        "sourceMap": true,
+        "tsBuildInfoFile": "./dist/tsconfig.tsbuildinfo"
+    },
+}

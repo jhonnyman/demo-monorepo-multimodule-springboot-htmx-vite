@@ -1,0 +1,56 @@
+<!doctype html>
+<html th:lang="${#locale}" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" data-theme="dark">
+    <th:block
+        th:replace="~{common/head :: head(
+        #{common.title.demo-app},
+        #{common.description.demo-app},
+        @{/},
+        @{/img/icon512_maskable.png},
+    )}"
+    >
+        <th:block th:fragment="customHead">
+            <th:block th:each="css : ${vite.manifestEntry('src/js/pages/testimony-view.ts').css}">
+                <link rel="stylesheet" th:href="@{${css}}" />
+            </th:block>
+        </th:block>
+    </th:block>
+
+    <body>
+        <!-- Page specific loads -->
+        <script type="module" th:src="@{${vite.manifestEntry('src/js/pages/home.ts').file}}" defer async></script>
+
+        <div th:replace="~{common/header}"></div>
+
+        <main>
+            <div class="container">
+                <h1>Your upload</h1>
+
+                <div th:if="${fileUrl}">
+                    <!-- Images -->
+                    <!-- <img
+                        th:if="${#strings.arrayContains({'png','jpg','jpeg','gif'}, #strings.substringAfterLast(fileName, '.').toLowerCase())}"
+                        th:src="${fileUrl}"
+                        alt="Image"
+                        style="max-width: 600px"
+                    /> -->
+
+                    <!-- Videos -->
+                    <video controls style="max-width: 600px">
+                        <source th:src="${fileUrl}" type="video/mp4" />
+                        Your browser does not support the video tag.
+                    </video>
+
+                    <!-- Download link as fallback -->
+                    <p><a th:href="${fileUrl}" target="_blank">Download file</a></p>
+                </div>
+
+                <div th:if="${error}">
+                    <p style="color: red" th:text="${error}"></p>
+                </div>
+            </div>
+        </main>
+
+        <div th:replace="~{common/footer}"></div>
+        <noscript th:text="#{common.noscript}"> Enable Javascript for a better experience </noscript>
+    </body>
+</html>

@@ -1,0 +1,38 @@
+<header th:fragment="header">
+    <script type="module" th:src="@{${vite.manifestEntry('src/js/common/header.ts').file}}" defer async></script>
+
+    <div class="container grid">
+        <div style="display: flex; align-items: baseline; gap: 1rem">
+            <a href="/">
+                <img
+                    class="logo"
+                    width="auto"
+                    height="48px"
+                    alt="Logo"
+                    th:src="@{/img/icon512_maskable.png}"
+                    style="max-height: 48px"
+                />
+            </a>
+            <span th:text="#{common.title.demo-app}" style="margin: 0; font-size: larger">Demo App</span>
+        </div>
+
+        <div>
+            <span th:text="${user.name}" th:if="${user != null}"></span>
+            <a th:fragment="login" href="/login" hx-swap="none" th:text="#{common.login}" th:if="${user == null}"
+                >Login</a
+            >
+            <button id="color-scheme-switch" class="light">Light/Dark Mode</button>
+
+            <form
+                name="logout-form"
+                method="post"
+                th:action="@{/logout}"
+                hx-boost="true"
+                style="display: flex"
+                th:if="${user != null}"
+            >
+                <button class="contrast" type="submit" th:text="#{common.logout}">Logout</button>
+            </form>
+        </div>
+    </div>
+</header>

@@ -1,0 +1,22 @@
+{
+    "trailingComma": "all",
+    "tabWidth": 4,
+    "semi": true,
+    "endOfLine": "lf",
+    "singleQuote": true,
+    "htmlWhitespaceSensitivity": "css",
+    "arrowParens": "always",
+    "useTabs": false,
+    "singleAttributePerLine": false,
+    "bracketSpacing": true,
+    "printWidth": 120,
+    "proseWrap": "always",
+    "overrides": [
+        {
+            "files": "*.json",
+            "options": {
+                "tabWidth": 2
+            }
+        }
+    ]
+}

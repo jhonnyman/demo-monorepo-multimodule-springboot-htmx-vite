@@ -1,0 +1,4 @@
+rootProject.name = 'demo'
+include 'demo-vendors', 'demo-vendors:spring-boot', 'demo-vendors:spring-boot-conventions', 'demo-app'
+
+includeBuild('demo-vendors/spring-boot-conventions')

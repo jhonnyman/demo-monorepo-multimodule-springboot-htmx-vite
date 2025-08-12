@@ -1,0 +1,29 @@
+api:
+  enabled: true
+  address: 0.0.0.0:8686
+
+sources:
+  demo_app:
+    type: file
+    include:
+      - "/opt/demo-com/spring/app.log*"
+    read_from: end
+
+sinks:
+  to_loki:
+    type: loki
+    inputs:
+      - demo_app
+    endpoint: http://loki:3100
+    compression: snappy
+    encoding:
+      codec: text
+    labels:
+      source: "demo-app"
+
+  demo_app_out:
+    inputs:
+      - demo_app
+    type: console
+    encoding:
+      codec: json
