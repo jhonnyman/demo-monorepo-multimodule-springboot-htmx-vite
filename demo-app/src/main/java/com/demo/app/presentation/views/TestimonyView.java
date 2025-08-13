@@ -1,4 +1,4 @@
-package com.demo.app.presentation.controllers;
+package com.demo.app.presentation.views;
 
 import com.demo.app.infra.storage.MinioManager;
 import io.minio.GetPresignedObjectUrlArgs;
